@@ -1,0 +1,14 @@
+canvas {
+    display: block;
+    margin: auto;
+    background-color: rgb(0, 0, 0);
+}
+@media screen and (max-width: 480px) {
+    /* 例: ゲーム画面全体をスマホ画面にフィットさせる */
+    canvas {
+      width: 100%;
+      height: auto;
+    }
+    /* 他のスマホ向けスタイルをここに追加 */
+  }
+  

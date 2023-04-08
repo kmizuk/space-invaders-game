@@ -126,3 +126,85 @@ function nextLevel() {
         }
     }
 }
+// タッチ開始時のイベントリスナー
+document.addEventListener('touchstart', function (event) {
+    // タッチ位置に応じてプレイヤーの操作を行う
+    const touchX = event.touches[0].clientX;
+    const touchY = event.touches[0].clientY;
+    const screenWidth = window.innerWidth;
+    const screenHeight = window.innerHeight;
+  
+    if (touchY < screenHeight / 2) {
+      // 画面の上半分がタッチされた場合、弾を発射
+      shootBullet();
+    } else {
+      if (touchX < screenWidth / 2) {
+        // 画面の下半分の左側がタッチされた場合、プレイヤーを左に移動
+        moveLeft = true;
+      } else {
+        // 画面の下半分の右側がタッチされた場合、プレイヤーを右に移動
+        moveRight = true;
+      }
+    }
+  });
+  
+  // タッチ終了時のイベントリスナー
+  document.addEventListener('touchend', function (event) {
+    // タッチ終了時の処理（例: プレイヤーの移動を停止）
+    moveLeft = false;
+    moveRight = false;
+  });
+  
+  // 弾を発射する関数
+  function shootBullet() {
+    // ここに弾を発射するためのコードを記述
+    // 弾のクラス定義
+class Bullet {
+    constructor(x, y) {
+      this.x = x;
+      this.y = y;
+      this.radius = 5;
+      this.speed = 5;
+    }
+  
+    // 弾の描画
+    draw(ctx) {
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+      ctx.fillStyle = 'white';
+      ctx.fill();
+      ctx.closePath();
+    }
+  
+    // 弾の移動
+    move() {
+      this.y -= this.speed;
+    }
+  }
+  
+  // 弾のインスタンスを格納する配列
+  let bullets = [];
+  
+  // 弾を発射する関数
+  function shootBullet() {
+    // 弾のインスタンスを生成し、配列に追加
+    const bullet = new Bullet(player.x, player.y);
+    bullets.push(bullet);
+  }
+  
+  // ゲームループ内で弾を描画・移動
+  function gameLoop() {
+    // ...省略...
+  
+    // 弾の描画と移動
+    for (let i = 0; i < bullets.length; i++) {
+      bullets[i].draw(ctx);
+      bullets[i].move();
+    }
+  
+    // ...省略...
+  }
+  
+  
+  }
+  
